@@ -59,6 +59,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
             jumpCount = 1; // Reset jump count when grounded
         }
 
+        anim.SetFloat("vValue", rb.linearVelocity.y);
         float vValue = rb.linearVelocity.y;
 
         if (!isGrounded)
