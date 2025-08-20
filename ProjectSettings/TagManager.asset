@@ -7,6 +7,7 @@ TagManager:
   - Pickup
   - '"Player"'
   - Tile
+  - Squish
   layers:
   - Default
   - TransparentFX
