@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -88,7 +88,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
@@ -128,15 +128,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Potions_0
+      name: Big_red_full
       rect:
         serializedVersion: 2
-        x: 1
-        y: 16
-        width: 14
-        height: 15
+        x: 2
+        y: 17
+        width: 12
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -150,15 +150,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potions_1
+      name: Big_blue_full
       rect:
         serializedVersion: 2
-        x: 17
-        y: 16
-        width: 14
-        height: 15
+        x: 18
+        y: 17
+        width: 12
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -172,15 +172,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potions_2
+      name: Big_empty
       rect:
         serializedVersion: 2
-        x: 33
-        y: 16
-        width: 14
-        height: 15
+        x: 34
+        y: 17
+        width: 12
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -194,15 +194,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potions_3
+      name: Small_red_full
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 10
-        height: 15
+        x: 4
+        y: 1
+        width: 9
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -216,15 +216,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potions_4
+      name: Small_blue_full
       rect:
         serializedVersion: 2
-        x: 19
-        y: 0
-        width: 10
-        height: 15
+        x: 20
+        y: 1
+        width: 8
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -238,15 +238,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Potions_5
+      name: Small_empty
       rect:
         serializedVersion: 2
-        x: 35
-        y: 0
-        width: 10
-        height: 15
+        x: 36
+        y: 1
+        width: 8
+        height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -263,7 +263,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ac40756cc7629704fbe3a65795d10f6c
     internalID: 0
     vertices: []
     indices: 
@@ -273,12 +273,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Potions_0: 1185527514606905908
-      Potions_1: -1061600653231999548
-      Potions_2: -3065595510956808684
-      Potions_3: 6997616985800771554
-      Potions_4: 8618505411793156745
-      Potions_5: -1972361127685065434
+      Big_blue_full: -1061600653231999548
+      Big_empty: -3065595510956808684
+      Big_red_full: 1185527514606905908
+      Small_blue_full: 8618505411793156745
+      Small_empty: -1972361127685065434
+      Small_red_full: 6997616985800771554
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
