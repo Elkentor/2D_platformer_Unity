@@ -64,7 +64,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -102,7 +102,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -140,15 +140,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BlueCoin Sheet_0
+      name: BlueCoin1
       rect:
         serializedVersion: 2
-        x: 2
-        y: 16
-        width: 12
-        height: 16
+        x: 3
+        y: 21
+        width: 10
+        height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -162,15 +162,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_1
+      name: fade2
       rect:
         serializedVersion: 2
-        x: 2
-        y: 0
-        width: 12
-        height: 16
+        x: 33
+        y: 7
+        width: 9
+        height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -184,15 +184,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_2
+      name: BlueCoin2
       rect:
         serializedVersion: 2
-        x: 19
-        y: 16
-        width: 10
-        height: 16
+        x: 20
+        y: 21
+        width: 8
+        height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -206,15 +206,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_3
+      name: BlueCoin3
       rect:
         serializedVersion: 2
-        x: 33
-        y: 3
-        width: 14
-        height: 29
+        x: 37
+        y: 21
+        width: 6
+        height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -228,15 +228,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_4
+      name: BlueCoin4
       rect:
         serializedVersion: 2
-        x: 49
-        y: 2
-        width: 15
-        height: 30
+        x: 54
+        y: 21
+        width: 4
+        height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,15 +250,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_5
+      name: fade3
       rect:
         serializedVersion: 2
-        x: 66
-        y: 11
+        x: 49
+        y: 8
         width: 9
-        height: 21
+        height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -272,15 +272,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_6
+      name: BlueCoin6
       rect:
         serializedVersion: 2
-        x: 75
-        y: 3
-        width: 20
-        height: 29
+        x: 85
+        y: 21
+        width: 6
+        height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -294,15 +294,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_7
+      name: BlueCoin7
       rect:
         serializedVersion: 2
-        x: 99
-        y: 16
-        width: 10
-        height: 16
+        x: 100
+        y: 21
+        width: 8
+        height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -316,15 +316,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_8
+      name: fade4
       rect:
         serializedVersion: 2
-        x: 114
-        y: 16
-        width: 12
-        height: 16
+        x: 66
+        y: 11
+        width: 3
+        height: 3
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -338,7 +338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BlueCoin Sheet_9
+      name: fade1
       rect:
         serializedVersion: 2
         x: 18
@@ -346,7 +346,7 @@ TextureImporter:
         width: 10
         height: 9
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -363,7 +363,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0fb3543b41cacc849b33cd8fbfa11fc8
     internalID: 0
     vertices: []
     indices: 
@@ -373,16 +373,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BlueCoin Sheet_0: -382467666205571427
-      BlueCoin Sheet_1: 3025935483925870932
-      BlueCoin Sheet_2: 9222248661886226138
-      BlueCoin Sheet_3: 1947868555215691800
-      BlueCoin Sheet_4: 4010627823840264888
-      BlueCoin Sheet_5: -7069694768290352327
-      BlueCoin Sheet_6: -1416055333563329412
-      BlueCoin Sheet_7: -5717477942442646187
-      BlueCoin Sheet_8: -2499856194217509303
-      BlueCoin Sheet_9: -9075500770189503866
+      BlueCoin1: -382467666205571427
+      BlueCoin2: 9222248661886226138
+      BlueCoin3: 1947868555215691800
+      BlueCoin4: 4010627823840264888
+      BlueCoin6: -1416055333563329412
+      BlueCoin7: -5717477942442646187
+      fade1: -9075500770189503866
+      fade2: 3025935483925870932
+      fade3: -7069694768290352327
+      fade4: -2499856194217509303
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
