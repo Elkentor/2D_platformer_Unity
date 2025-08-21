@@ -26,13 +26,13 @@ public class Pickups : MonoBehaviour
             switch (pickupType)
             {
                 case PickupType.Life:
-                    pc.lives++;
-                    Debug.Log("Life collected! Current lives: " + pc.lives);
+                    pc.Lives++;
+                    Debug.Log("Life collected! Current lives: " + pc.Lives);
                     break;
                 case PickupType.Score:
-                    pc.score++;
+                    pc.Score++;
                     //if (animator != null)
-                    Debug.Log("Score collected! Current score: " + pc.score);
+                    Debug.Log("Score collected! Current score: " + pc.Score);
                     break;
                 case PickupType.Powerup:
                     pc.ActivateJumpForceChange();

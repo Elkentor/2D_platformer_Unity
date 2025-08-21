@@ -5,7 +5,7 @@ public class Life : Pickup
     Rigidbody2D rb;
 
     private int xVel = -4;
-    public override void OnPickup(GameObject player) => player.GetComponent<PlayerController>().lives++;
+    public override void OnPickup(GameObject player) => player.GetComponent<PlayerController>().Lives++;
 
     void Start()
     {
