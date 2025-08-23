@@ -456,7 +456,6 @@ Transform:
   m_Children:
   - {fileID: 1322573127}
   - {fileID: 362472708}
-  - {fileID: 950014059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &411736886
@@ -625,6 +624,7 @@ GameObject:
   - component: {fileID: 950014058}
   - component: {fileID: 950014057}
   - component: {fileID: 950014060}
+  - component: {fileID: 950014061}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -700,11 +700,11 @@ Transform:
   m_GameObject: {fileID: 950014056}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.049999952, y: 0.5, z: -9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.1, y: -2.1, z: -10}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 411736885}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &950014060
 MonoBehaviour:
@@ -750,6 +750,23 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &950014061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950014056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d67be83949c110445aec709c494c67fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minXPos: -2.2
+  maxXPos: 127.7
+  minYPos: -2.9
+  maxYPos: 5.2
+  target: {fileID: 411736885}
 --- !u!1 &1030214637
 GameObject:
   m_ObjectHideFlags: 0
@@ -52428,6 +52445,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 426370296107106452, guid: 48094cced5268cb49bca9e7db525970a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 53.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8755060648618156774, guid: 48094cced5268cb49bca9e7db525970a, type: 3}
       propertyPath: m_Name
       value: Pickup_blue_coin
@@ -52453,3 +52474,4 @@ SceneRoots:
   - {fileID: 1119740597}
   - {fileID: 4278870200427510089}
   - {fileID: 1955368887617423239}
+  - {fileID: 950014059}
