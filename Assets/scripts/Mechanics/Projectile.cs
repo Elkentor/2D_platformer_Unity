@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private ProjectileType projectileType = ProjectileType.Player;
     [SerializeField, Range(1, 10)] private float lifetime = 0.5f;
+    [SerializeField] private float damage = 10f;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -18,6 +19,7 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
     }
+
     private void Start()
     {
         StartCoroutine(LifetimeCoroutine());
@@ -26,22 +28,31 @@ public class Projectile : MonoBehaviour
     public void SetVelocity(Vector2 velocity)
     {
         if (rb == null)
-            rb = GetComponent<Rigidbody2D>(); // Safety check
+            rb = GetComponent<Rigidbody2D>();
 
-        rb.linearVelocity = velocity; // Use velocity instead of linearVelocity
+        rb.linearVelocity = velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         TriggerImpact();
 
-        // Optional: apply damage if it's a player projectile
         if (projectileType == ProjectileType.Player)
         {
+            // Damage enemy
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
                 enemy.TakeDamage(10);
+            }
+        }
+        else if (projectileType == ProjectileType.Enemy)
+        {
+            // Damage player
+            PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+            if (player != null)
+            {
+                player.TakeDamage(10);
             }
         }
     }
@@ -55,6 +66,7 @@ public class Projectile : MonoBehaviour
             TriggerImpact();
         }
     }
+
     private void TriggerImpact()
     {
         if (hasImpacted) return;
@@ -64,7 +76,14 @@ public class Projectile : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         col.enabled = false;
 
-        animator.SetTrigger("Impact");
+        if (animator != null)
+        {
+            animator.SetTrigger("Impact");
+        }
+        else
+        {
+            Destroy(gameObject); // Fallback if no animation
+        }
     }
 
     // Call this from an Animation Event at the end of the impact animation

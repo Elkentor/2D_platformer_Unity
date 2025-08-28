@@ -2,34 +2,65 @@ using UnityEngine;
 
 public class TurretEnemy : Enemy
 {
-    [SerializeField] private float fireRate = 2.0f; // Time between shots
+    [SerializeField] private float fireRate = 3.0f;
+    [SerializeField] private float detectionRadius = 5.0f;
     private float timeSinceLastShot = 0.0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Transform player;
+    private Shoot shoot;
+
     protected override void Start()
     {
         base.Start();
-        // Additional initialization for TurretEnemy can go here
 
         if (fireRate <= 0)
         {
             Debug.LogError("Fire rate must be greater than 0. Setting to default value of 2.0f.");
             fireRate = 2.0f;
         }
+
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            player = playerObj.transform;
+
+        shoot = GetComponent<Shoot>();
     }
-    // Update is called once per frame
+
     void Update()
     {
-        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        if (player == null) return;
 
-        if (stateInfo.IsName("Idle"))
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        if (distance <= detectionRadius)
         {
-            //check our file logic
-            if (Time.time >= timeSinceLastShot + fireRate)
+            AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+
+            if (stateInfo.IsName("Idle"))
             {
-                anim.SetTrigger("Fire");
-                timeSinceLastShot = Time.time; // Reset the timer after firing
+                if (Time.time >= timeSinceLastShot + fireRate)
+                {
+                    // Flip turret based on player position
+                    SpriteRenderer sr = shoot.GetComponent<SpriteRenderer>();
+                    if (sr != null)
+                    {
+                        sr.flipX = player.position.x < transform.position.x;
+                    }
+
+                    anim.SetTrigger("Fire");
+                    timeSinceLastShot = Time.time;
+
+                    shoot?.Fire();
+
+                    Debug.Log($"{name} fired at {Time.time} (Player distance: {distance})");
+                }
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

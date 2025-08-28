@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class Shoot : MonoBehaviour
 {
     private SpriteRenderer sr;
@@ -8,7 +9,7 @@ public class Shoot : MonoBehaviour
     [SerializeField] private Projectile projectilePrefab = null;
 
     private Vector2 leftShotVel = Vector2.zero;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -31,6 +32,7 @@ public class Shoot : MonoBehaviour
     public void Fire()
     {
         Projectile curProjectile;
+
         if (!sr.flipX)
         {
             curProjectile = Instantiate(projectilePrefab, rightSpawn.position, Quaternion.identity);
@@ -40,6 +42,13 @@ public class Shoot : MonoBehaviour
         {
             curProjectile = Instantiate(projectilePrefab, leftSpawn.position, Quaternion.identity);
             curProjectile.SetVelocity(leftShotVel);
+
+            // Flip the projectile sprite when shooting left
+            SpriteRenderer projSR = curProjectile.GetComponent<SpriteRenderer>();
+            if (projSR != null)
+            {
+                projSR.flipX = true;
+            }
         }
     }
 }

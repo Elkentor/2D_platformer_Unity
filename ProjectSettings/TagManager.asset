@@ -9,6 +9,7 @@ TagManager:
   - Tile
   - Squish
   - DeadCollider
+  - Enemy
   layers:
   - Default
   - TransparentFX
