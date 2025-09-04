@@ -4,19 +4,22 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 100f;
     private float currentHealth;
-    private float totalDamageTaken = 0f;
+
+    private Animator anim;
+    private bool isDead = false;
 
     void Start()
     {
         currentHealth = maxHealth;
+        anim = GetComponent<Animator>();
     }
 
     public void TakeDamage(float amount)
     {
-        currentHealth -= amount;
-        totalDamageTaken += amount;
+        if (isDead) return;
 
-        Debug.Log($"Player took {amount} damage. Current HP: {currentHealth}. Total damage taken: {totalDamageTaken}");
+        currentHealth -= amount;
+        Debug.Log($"Player took {amount} damage. Current health: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -24,9 +27,31 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void Heal(float amount)
+    {
+        if (isDead) return;
+
+        currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        Debug.Log($"Player healed {amount}. Current health: {currentHealth}");
+    }
+
     private void Die()
     {
+        isDead = true;
         Debug.Log("Player died.");
-        // Add death logic here (animation, respawn, etc.)
+
+        if (anim != null)
+        {
+            anim.SetTrigger("Dead");
+        }
+
+        GameManager.Instance.PlayerDied(); // Notify GameManager
+
+        // Optional: disable movement or trigger respawn logic here
+    }
+
+    public float GetHealthPercent()
+    {
+        return currentHealth / maxHealth;
     }
 }

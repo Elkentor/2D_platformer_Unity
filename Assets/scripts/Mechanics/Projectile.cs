@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private ProjectileType projectileType = ProjectileType.Player;
     [SerializeField, Range(1, 10)] private float lifetime = 0.5f;
-    [SerializeField] private float damage = 10f;
+    [SerializeField] private int damage = 10;
 
     private Animator animator;
     private Rigidbody2D rb;
@@ -35,27 +35,26 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        TriggerImpact();
+        TriggerImpact(); // Always trigger impact visuals
 
         if (projectileType == ProjectileType.Player)
         {
-            // Damage enemy
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
+            // Try to damage an enemy
+            if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
-                enemy.TakeDamage(10);
+                enemy.TakeDamage(damage);
             }
         }
         else if (projectileType == ProjectileType.Enemy)
         {
-            // Damage player
-            PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
-            if (player != null)
+            // Try to damage the player
+            if (collision.gameObject.TryGetComponent<PlayerHealth>(out PlayerHealth player))
             {
-                player.TakeDamage(10);
+                player.TakeDamage(damage);
             }
         }
     }
+
 
     private IEnumerator LifetimeCoroutine()
     {

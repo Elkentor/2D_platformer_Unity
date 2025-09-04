@@ -5,14 +5,11 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform respawnPoint; // Assign in Inspector
-    [SerializeField] private int maxLives = 9;
+    [SerializeField] private Transform respawnPoint;
     [SerializeField] private int jumpForce = 6;
     [SerializeField] private int maxJumpCount = 2;
     [SerializeField] private float groundCheckRadius = 0.02f;
 
-    private int _score = 0;
-    private int _Lives = 3;
     private int jumpCount = 1;
     private float initialGroundCheckRadius;
     private bool isDead = false;
@@ -25,33 +22,6 @@ public class PlayerController : MonoBehaviour
     private Collider2D col;
     private Animator anim;
     private GroundCheck groundCheck;
-
-    public int Score
-    {
-        get => _score;
-        set => _score = Mathf.Max(0, value);
-    }
-
-    public int Lives
-    {
-        get => _Lives;
-        set
-        {
-            if (value < 0)
-            {
-                Debug.Log("Game Over! You have no lives left.");
-                _Lives = 0;
-            }
-            else if (value > maxLives)
-            {
-                _Lives = maxLives;
-            }
-            else
-            {
-                _Lives = value;
-            }
-        }
-    }
 
     void Start()
     {
@@ -88,8 +58,6 @@ public class PlayerController : MonoBehaviour
         if (!currentState.IsName("Fire") && Input.GetButtonDown("Fire1"))
         {
             anim.SetTrigger("Fire");
-            // Optionally call Fire() from Shoot script directly:
-            GetComponent<Shoot>()?.Fire();
         }
         else if (currentState.IsName("Jump") && Input.GetButton("Fire2") && vValue > 0)
         {
@@ -141,47 +109,74 @@ public class PlayerController : MonoBehaviour
         jumpForceChange = null;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isDead) return;
 
-        if (collision.CompareTag("DeadCollider"))
+        // Access the collider from the collision
+        Collider2D otherCollider = collision.collider;
+
+        // Handle death collision
+        if (otherCollider.CompareTag("DeadCollider"))
         {
+            Debug.Log("DeadCollider hit — triggering death sequence");
             isDead = true;
-            Lives--;
             anim.SetTrigger("Dead");
+            GameManager.Instance.PlayerDied();
             StartCoroutine(HandleDeath());
         }
-        else if (collision.CompareTag("Squish") && rb.linearVelocity.y < 0)
+
+        // Handle squish collision
+        else if (otherCollider.CompareTag("Squish") && rb.linearVelocity.y < 0)
         {
-            collision.GetComponentInParent<Enemy>().TakeDamage(0, DamageType.JumpedOn);
-            rb.linearVelocity = Vector2.zero;
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            Enemy enemy = otherCollider.GetComponentInParent<Enemy>();
+            if (enemy != null)
+            {
+                Debug.Log("Squish hit — damaging enemy and bouncing player");
+                enemy.TakeDamage(0, DamageType.JumpedOn);
+                rb.linearVelocity = Vector2.zero;
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                GameManager.Instance.AddScore(100); // Example score
+            }
         }
     }
 
     private IEnumerator HandleDeath()
     {
+        Debug.Log("Starting respawn sequence");
+
+        // Stop movement and disable physics
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Static;
         col.enabled = false;
 
-        anim.SetTrigger("Dead");
+        // Wait for death animation to play
+        yield return new WaitForSeconds(1.5f);
 
-        yield return new WaitForSeconds(1.5f); // Wait for death animation
-
+        // Hide the sprite
         sr.enabled = false;
 
-        yield return new WaitForSeconds(0.5f); // Optional delay
+        // Wait a bit more before respawning
+        yield return new WaitForSeconds(0.5f);
 
-        // Respawn
-        transform.position = respawnPoint.position;
+        // Move player to respawn point
+        if (respawnPoint != null)
+        {
+            Debug.Log("Respawning player at: " + respawnPoint.position);
+            transform.position = respawnPoint.position;
+        }
+        else
+        {
+            Debug.LogError("Respawn point not assigned in Inspector!");
+            yield break;
+        }
+
+        // Re-enable everything
         rb.bodyType = RigidbodyType2D.Dynamic;
         col.enabled = true;
         sr.enabled = true;
 
         isDead = false;
+        Debug.Log("Player respawned");
     }
-
 }
-
