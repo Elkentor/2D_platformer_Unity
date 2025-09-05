@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
     [SerializeField] private int maxLives = 9;
+    [SerializeField] private Transform RespawnPoint;
     public GameState currentState;
 
     public enum GameState { Title, Playing, GameOver }
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
                 PlayerLives = 3;
                 Score = 0;
                 SceneManager.LoadScene("GameScene");
+                StartCoroutine(AssignRespawnPointAfterSceneLoad());
                 break;
             case GameState.GameOver:
                 SceneManager.LoadScene("GameOverMenu");
@@ -56,18 +59,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PlayerDied()
+    private IEnumerator AssignRespawnPointAfterSceneLoad()
     {
-        PlayerLives = Mathf.Clamp(PlayerLives - 1, 0, maxLives);
-        Debug.Log($"Player died. Lives left: {PlayerLives}");
+        // Wait one frame for the new scene to load
+        yield return null;
 
-        if (PlayerLives <= 0)
+        GameObject found = GameObject.Find("RespawnPoint");
+        if (found != null)
         {
-            SetState(GameState.GameOver);
+            RespawnPoint = found.transform;
+            Debug.Log("RespawnPoint assigned: " + RespawnPoint.position);
         }
         else
         {
-            RespawnPlayer();
+            Debug.LogError("RespawnPoint not found in GameScene!");
+        }
+    }
+
+    public void PlayerDied()
+    {
+        PlayerLives--;
+
+        if (PlayerLives > 0)
+        {
+            StartCoroutine(RespawnPlayer());
+        }
+        else
+        {
+            //transit to game over state
+            SetState(GameState.GameOver);
         }
     }
 
@@ -83,10 +103,28 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Life updated: {PlayerLives}");
     }
 
-    public void RespawnPlayer()
+    private IEnumerator RespawnPlayer()
     {
-        Debug.Log("Respawning player...");
-        // You can expand this to find the player and reset their state if needed
+        yield return new WaitForSeconds(2f); // small delay after death
+
+        var player = Object.FindFirstObjectByType<PlayerController>();
+        if (player != null && RespawnPoint != null)
+        {
+            Debug.Log("Respawning player at: " + RespawnPoint.position);
+            player.transform.position = RespawnPoint.position;
+            player.ResetState();
+
+            var health = player.GetComponent<PlayerHealth>();
+            if (health != null)
+            {
+                health.ResetHealth(); // restore health
+            }
+
+        }
+        else
+        {
+            Debug.LogError("Respawn failed — missing player or respawn point!");
+        }
     }
 
     public void StartGame()
@@ -99,6 +137,7 @@ public class GameManager : MonoBehaviour
     {
         SetState(GameState.Title);
     }
+
     public void ExitGame()
     {
         Debug.Log("Exiting game...");
@@ -108,5 +147,4 @@ public class GameManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false; // Stops play mode in the editor
 #endif
     }
-
 }

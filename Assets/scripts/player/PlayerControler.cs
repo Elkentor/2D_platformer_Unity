@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("DeadCollider hit — triggering death sequence");
             isDead = true;
             anim.SetTrigger("Dead");
-            GameManager.Instance.PlayerDied();
+            //GameManager.Instance.PlayerDied();
             StartCoroutine(HandleDeath());
         }
 
@@ -150,33 +150,23 @@ public class PlayerController : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         col.enabled = false;
 
+        anim.SetTrigger("Dead");
+
         // Wait for death animation to play
         yield return new WaitForSeconds(1.5f);
 
         // Hide the sprite
         sr.enabled = false;
 
-        // Wait a bit more before respawning
-        yield return new WaitForSeconds(0.5f);
+        GameManager.Instance.PlayerDied(); // Notify GameManager
+    }
 
-        // Move player to respawn point
-        if (respawnPoint != null)
-        {
-            Debug.Log("Respawning player at: " + respawnPoint.position);
-            transform.position = respawnPoint.position;
-        }
-        else
-        {
-            Debug.LogError("Respawn point not assigned in Inspector!");
-            yield break;
-        }
-
-        // Re-enable everything
+    public void ResetState()
+    {
         rb.bodyType = RigidbodyType2D.Dynamic;
         col.enabled = true;
         sr.enabled = true;
-
         isDead = false;
-        Debug.Log("Player respawned");
+        anim.ResetTrigger("Dead");
     }
 }

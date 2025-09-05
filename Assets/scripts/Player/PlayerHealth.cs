@@ -39,19 +39,20 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
         Debug.Log("Player died.");
-
-        if (anim != null)
-        {
-            anim.SetTrigger("Dead");
-        }
-
+        anim.SetTrigger("Dead");
         GameManager.Instance.PlayerDied(); // Notify GameManager
-
-        // Optional: disable movement or trigger respawn logic here
     }
 
     public float GetHealthPercent()
     {
         return currentHealth / maxHealth;
     }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        isDead = false;
+        Debug.Log("Player health reset to max.");
+    }
+
 }

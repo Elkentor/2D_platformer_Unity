@@ -14,7 +14,7 @@ public class MainMenuUI : MonoBehaviour
             Debug.LogError("GameManager not found! Make sure it exists in the scene.");
         }
     }
-
+   
     public void ExitGame()
     {
         Debug.Log("Quitting game...");
@@ -23,6 +23,16 @@ public class MainMenuUI : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false; // Stops play mode in the editor
 #endif
     }
-}
 
-    
+    public void LoadTitleMenu()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.LoadTitleMenu();
+        }
+        else
+        {
+            Debug.LogError("GameManager not found! Make sure it exists in the scene.");
+        }
+        }
+}
