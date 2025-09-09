@@ -36,6 +36,12 @@ public class GameManager : MonoBehaviour
         {
             LoadTitleMenu();
         }
+
+        if (currentState == GameState.Playing && Input.GetKeyDown(KeyCode.P))
+        {
+            TogglePause();
+        }
+
     }
 
     public void SetState(GameState newState)
@@ -143,8 +149,24 @@ public class GameManager : MonoBehaviour
         Debug.Log("Exiting game...");
         Application.Quit();
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false; // Stops play mode in the editor
-#endif
+        #endif
     }
+
+    public void TogglePause()
+ {
+    PauseMenu pauseMenu = Object.FindFirstObjectByType<PauseMenu>();
+    if (pauseMenu == null)
+    {
+        Debug.LogWarning("PauseMenu not found in scene.");
+        return;
+    }
+
+    if (PauseMenu.IsPaused)
+        pauseMenu.Resume();
+    else
+        pauseMenu.Pause();
+}
+
 }
