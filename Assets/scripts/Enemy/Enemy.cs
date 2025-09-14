@@ -41,6 +41,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (health <= 0)
         {
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.enemyDeathSFX);
             anim.SetTrigger("Death");
 
             // Destroy the enemy after the death animation is complete

@@ -52,15 +52,18 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Title:
                 SceneManager.LoadScene("TitleMenu");
+                AudioManager.Instance.PlayMusic(AudioManager.Instance.titleMusic);
                 break;
             case GameState.Playing:
                 PlayerLives = 3;
                 Score = 0;
                 SceneManager.LoadScene("GameScene");
+                AudioManager.Instance.PlayMusic(AudioManager.Instance.gameplayMusic);
                 StartCoroutine(AssignRespawnPointAfterSceneLoad());
                 break;
             case GameState.GameOver:
                 SceneManager.LoadScene("GameOverMenu");
+                AudioManager.Instance.PlayMusic(AudioManager.Instance.gameOverMusic);
                 break;
         }
     }
@@ -84,6 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDied()
     {
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.playerDeathSFX);
         PlayerLives--;
 
         if (PlayerLives > 0)
